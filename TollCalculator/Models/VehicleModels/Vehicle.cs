@@ -12,24 +12,11 @@ namespace TollCalculator.Models.VehicleModels
             TollDays = new List<TollDay>();
         }
 
-        public Vehicle()
-        {
-            TollDays = new List<TollDay>();
-        }
-
         #region properties
         public List<TollDay> TollDays { get; set; }
 
-        //public string VehicleType { get; set; }
-        public TollDay CurrentTollDay
-        {
-            get; set;
-        }
+        public TollDay CurrentTollDay { get; set; }
 
-        TollDay SetTollDay()
-        {
-            return CurrentTollDay ?? new TollDay();
-        }
         public bool IsTollFreeVehicle => VehicleType switch
         {
             VehicleType.Car => false,
@@ -47,11 +34,6 @@ namespace TollCalculator.Models.VehicleModels
         public VehicleType VehicleType { get; set; }
 
         #endregion properties
-
-        public bool IsVehicleTollFree()
-        {
-            return IsTollFreeVehicle;
-        }
 
     }
 }
