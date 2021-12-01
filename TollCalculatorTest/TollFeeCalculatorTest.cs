@@ -1,9 +1,7 @@
-using Xunit;
-using TollFeeCalculator.TollFeeCalculatorNET;
 using System;
 using TollFeeCalculator.Models;
-using TollFeeCalculator;
-using TollFeeCalculator.Models.VehicleModels;
+using TollFeeCalculator.TollFeeCalculatorNET;
+using Xunit;
 
 namespace TollFeeCalculatorTest
 {
