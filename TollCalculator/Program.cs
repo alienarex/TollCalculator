@@ -9,7 +9,7 @@ namespace TollCalculator
     {
         static void Main(string[] args)
         {
-            Vehicle vehicle = new Vehicle(Enums.VehicleType.Car);
+            Vehicle vehicle = new(Enums.VehicleType.Car);
             DateTime date = DateTime.Now; // this should come from other system
             GetCalculation(vehicle, date);
             Console.ReadLine();

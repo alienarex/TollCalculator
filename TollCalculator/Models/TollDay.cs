@@ -46,7 +46,6 @@ namespace TollCalculator.Models
 
         #endregion End properties
 
-
         /// <summary>
         /// Checks if TodayDate is a weekend, holiday or day before a valid holiday
         /// </summary>

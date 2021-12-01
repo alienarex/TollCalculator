@@ -26,6 +26,10 @@ namespace TollCalculator.Models.VehicleModels
             get; set;
         }
 
+        TollDay SetTollDay()
+        {
+            return CurrentTollDay ?? new TollDay();
+        }
         public bool IsTollFreeVehicle => VehicleType switch
         {
             VehicleType.Car => false,
