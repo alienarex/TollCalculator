@@ -10,7 +10,7 @@ namespace TollFeeCalculatorTest
         public void IsDateAHoliday_ShouldReturnFalse()
         {
             DateTime testDate = new DateTime(2021, 04, 03, 08, 11, 00);
-            bool isDayAWeekend = TollFeeCalculator.Models.Calander.IsDateAHoliday(testDate);
+            bool isDayAWeekend = TollCalculator.Models.Calander.IsDateAHoliday(testDate);
 
             Assert.False(isDayAWeekend);
         }
@@ -19,7 +19,7 @@ namespace TollFeeCalculatorTest
         public void IsDayAHoliday_ShouldReturnTrue()
         {
             DateTime testDate = new DateTime(2020, 12, 25);
-            bool isDayAWeekend = TollFeeCalculator.Models.Calander.IsDateAHoliday(testDate);
+            bool isDayAWeekend = TollCalculator.Models.Calander.IsDateAHoliday(testDate);
 
             Assert.True(isDayAWeekend);
         }
@@ -28,7 +28,7 @@ namespace TollFeeCalculatorTest
         public void IsDayAWeekend_ShouldReturnFalse()
         {
             DateTime testDate = new DateTime(2021, 11, 26, 08, 11, 00);
-            bool isDayAWeekend = TollFeeCalculator.Models.Calander.IsDateAWeekend(testDate);
+            bool isDayAWeekend = TollCalculator.Models.Calander.IsDateAWeekend(testDate);
 
             Assert.False(isDayAWeekend);
         }
@@ -37,7 +37,7 @@ namespace TollFeeCalculatorTest
         public void IsDayAWeekend_ShouldReturnTrue()
         {
             DateTime testDate = new DateTime(2021, 11, 20, 08, 11, 00);
-            bool isDayAWeekend = TollFeeCalculator.Models.Calander.IsDateAWeekend(testDate);
+            bool isDayAWeekend = TollCalculator.Models.Calander.IsDateAWeekend(testDate);
 
             Assert.True(isDayAWeekend);
         }
@@ -46,7 +46,7 @@ namespace TollFeeCalculatorTest
         public void IsDateADayBeforeValidHoliday_ShouldReturnTrue()
         {
             DateTime testDate = new DateTime(2021, 06, 24);
-            bool isDayBefforeValidDay = TollFeeCalculator.Models.Calander.IsDateADayBeforeAValidHoliday(testDate);
+            bool isDayBefforeValidDay = TollCalculator.Models.Calander.IsDateADayBeforeAValidHoliday(testDate);
 
             Assert.True(isDayBefforeValidDay);
         }
@@ -55,7 +55,7 @@ namespace TollFeeCalculatorTest
         public void IsDateADayBeforeValidHoliday_ShouldReturnFalse()
         {
             DateTime testDate = new DateTime(2021, 12, 23, 08, 11, 00);
-            bool isDayBefforeValidDay = TollFeeCalculator.Models.Calander.IsDateADayBeforeAValidHoliday(testDate);
+            bool isDayBefforeValidDay = TollCalculator.Models.Calander.IsDateADayBeforeAValidHoliday(testDate);
 
             Assert.False(isDayBefforeValidDay);
         }

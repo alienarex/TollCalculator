@@ -1,6 +1,6 @@
 using System;
-using TollFeeCalculator.Models;
-using TollFeeCalculator.TollFeeCalculatorNET;
+using TollCalculator.Models;
+using TollCalculator.TollFeeCalculatorNET;
 using Xunit;
 
 namespace TollFeeCalculatorTest
@@ -14,7 +14,7 @@ namespace TollFeeCalculatorTest
             DateTime date = new DateTime(2021, 11, 26, 08, 11, 00);
             TollDay tollDayTest = new TollDay(date);
             tollDayTest.Passages.Add(new Passage(date));
-            TollCalculator.SetFee(tollDayTest);
+            TollFeeCalculator.SetFee(tollDayTest);
 
             Assert.Equal(expectedFee, tollDayTest.TotalFee);
         }
@@ -26,11 +26,11 @@ namespace TollFeeCalculatorTest
             DateTime date = new DateTime(2021, 11, 26, 06, 15, 00);
             TollDay tollDayTest = new TollDay(date);
             tollDayTest.Passages.Add(new Passage(date));
-            TollCalculator.SetFee(tollDayTest);
+            TollFeeCalculator.SetFee(tollDayTest);
 
             Assert.Equal(expectedFee, tollDayTest.Passages[0].Fee);
         }
 
-      
+
     }
 }

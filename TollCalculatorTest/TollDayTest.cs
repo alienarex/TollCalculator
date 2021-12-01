@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TollFeeCalculator.Models;
-using TollFeeCalculator.TollFeeCalculatorNET;
+using TollCalculator.Models;
 using Xunit;
+using TollCalculator.TollFeeCalculatorNET;
 
 namespace TollFeeCalculatorTest
 {
@@ -34,7 +34,7 @@ namespace TollFeeCalculatorTest
             foreach (var passage in listOfPassagesTest)
             {
                 tollDayTest.Passages.Add(passage);
-                TollCalculator.SetFee(tollDayTest);
+                TollFeeCalculator.SetFee(tollDayTest);
             }
 
             Assert.Equal(expectedReturnValue, tollDayTest.TotalFee);
@@ -50,7 +50,7 @@ namespace TollFeeCalculatorTest
             foreach (var date in listOfDates)
             {
                 tollDayTest.Passages.Add(new Passage(date));
-                TollCalculator.SetFee(tollDayTest);
+                TollFeeCalculator.SetFee(tollDayTest);
             }
             Assert.Equal(expectedReturnValue, tollDayTest.TotalFee);
         }
