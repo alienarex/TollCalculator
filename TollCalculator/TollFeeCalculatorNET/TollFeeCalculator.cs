@@ -1,9 +1,9 @@
 ﻿using System;
-using TollFeeCalculator.Models;
+using TollCalculator.Models;
 
-namespace TollFeeCalculator.TollFeeCalculatorNET
+namespace TollCalculator.TollFeeCalculatorNET
 {
-    public static class TollCalculator
+    public static class TollFeeCalculator
     {
 
         /// <summary>

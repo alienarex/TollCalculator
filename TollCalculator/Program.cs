@@ -1,15 +1,15 @@
 ﻿using System;
-using TollFeeCalculator.Models;
-using TollFeeCalculator.Models.VehicleModels;
-using TollFeeCalculator.TollFeeCalculatorNET;
+using TollCalculator.Models;
+using TollCalculator.Models.VehicleModels;
+using static TollCalculator.TollFeeCalculatorNET.TollFeeCalculator;
 
-namespace TollFeeCalculator
+namespace TollCalculator
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            IVehicle vehicle = new Car();
+            IVehicle vehicle = new Vehicle(Enums.VehicleType.Car);
             DateTime date = DateTime.Now; // this should come from other system
             GetCalculation(vehicle, date);
             Console.ReadLine();
@@ -20,7 +20,7 @@ namespace TollFeeCalculator
             vehicle.GetCurrentTollDay().Passages.Add(new Passage(date));
             if (!vehicle.IsVehicleTollFree() && !vehicle.GetCurrentTollDay().TollFreeDay)
             {
-                TollCalculator.SetFee(vehicle.GetCurrentTollDay());
+                SetFee(vehicle.GetCurrentTollDay());
             }
         }
     }
