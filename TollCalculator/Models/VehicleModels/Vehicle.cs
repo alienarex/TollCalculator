@@ -4,7 +4,7 @@ using TollCalculator.Enums;
 
 namespace TollCalculator.Models.VehicleModels
 {
-    public class Vehicle : IVehicle
+    public class Vehicle
     {
         public Vehicle(VehicleType vehicleType)
         {
@@ -44,16 +44,6 @@ namespace TollCalculator.Models.VehicleModels
 
         #endregion properties
 
-        /// <summary>
-        /// Get the current toll day or create a new if there are none
-        /// </summary>
-        /// <returns></returns>
-        public TollDay GetCurrentTollDay()
-        {
-            CurrentTollDay ??= new TollDay();
-
-            return CurrentTollDay;
-        }
         public bool IsVehicleTollFree()
         {
             return IsTollFreeVehicle;

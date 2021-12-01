@@ -9,18 +9,18 @@ namespace TollCalculator
     {
         static void Main(string[] args)
         {
-            IVehicle vehicle = new Vehicle(Enums.VehicleType.Car);
+            Vehicle vehicle = new Vehicle(Enums.VehicleType.Car);
             DateTime date = DateTime.Now; // this should come from other system
             GetCalculation(vehicle, date);
             Console.ReadLine();
         }
 
-        public static void GetCalculation(IVehicle vehicle, DateTime date)
+        public static void GetCalculation(Vehicle vehicle, DateTime date)
         {
-            vehicle.GetCurrentTollDay().Passages.Add(new Passage(date));
-            if (!vehicle.IsVehicleTollFree() && !vehicle.GetCurrentTollDay().TollFreeDay)
+            vehicle.CurrentTollDay.Passages.Add(new Passage(date));
+            if (!vehicle.IsTollFreeVehicle && !vehicle.CurrentTollDay.TollFreeDay)
             {
-                SetFee(vehicle.GetCurrentTollDay());
+                SetFee(vehicle.CurrentTollDay);
             }
         }
     }
