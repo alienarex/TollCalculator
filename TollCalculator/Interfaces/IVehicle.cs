@@ -1,11 +1,9 @@
-﻿using TollFeeCalculator.Models;
+﻿using TollCalculator.Models;
 
-namespace TollFeeCalculator
+namespace TollCalculator
 {
     public interface IVehicle
     {
-        string VehicleType { get; set; }
-        string GetVehicleType();
         TollDay GetCurrentTollDay();
         bool IsVehicleTollFree();
 
