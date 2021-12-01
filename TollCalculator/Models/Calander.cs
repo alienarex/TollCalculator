@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TollFeeCalculator.Models
+namespace TollCalculator.Models
 {
     public static class Calander
     {

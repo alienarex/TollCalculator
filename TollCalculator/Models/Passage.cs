@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TollFeeCalculator.Models
+namespace TollCalculator.Models
 {
     public class Passage
     {

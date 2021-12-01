@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using static TollFeeCalculator.Models.Calander;
+using static TollCalculator.Models.Calander;
 
-namespace TollFeeCalculator.Models
+namespace TollCalculator.Models
 {
     public class TollDay
     {

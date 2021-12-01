@@ -1,9 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TollCalculator.Enums;
 
-namespace TollFeeCalculator.Models.VehicleModels
+namespace TollCalculator.Models.VehicleModels
 {
     public class Vehicle : IVehicle
     {
+        public Vehicle(VehicleType vehicleType)
+        {
+            VehicleType = vehicleType;
+            TollDays = new List<TollDay>();
+        }
+
         public Vehicle()
         {
             TollDays = new List<TollDay>();
@@ -12,25 +20,34 @@ namespace TollFeeCalculator.Models.VehicleModels
         #region properties
         public List<TollDay> TollDays { get; set; }
 
-        public string VehicleType { get; set; }
+        //public string VehicleType { get; set; }
         public TollDay CurrentTollDay
         {
             get; set;
         }
-        public string RegistrationNumber
+
+        public bool IsTollFreeVehicle => VehicleType switch
         {
-            get;
-            set;
-        }
-        public bool IsTollFreeVehicle { get; protected set; }
+            VehicleType.Car => false,
+            VehicleType.Motorbike => true,
+            VehicleType.Diplomat => true,
+            VehicleType.Emergency => true,
+            VehicleType.Foreign => false,
+            VehicleType.HeavyBus => true,
+            VehicleType.LightBus => false,
+            VehicleType.Military => true,
+            VehicleType.Tractor => true,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        public VehicleType VehicleType { get; set; }
+
         #endregion properties
 
-
-        public string GetVehicleType()
-        {
-            return VehicleType;
-        }
-
+        /// <summary>
+        /// Get the current toll day or create a new if there are none
+        /// </summary>
+        /// <returns></returns>
         public TollDay GetCurrentTollDay()
         {
             CurrentTollDay ??= new TollDay();
