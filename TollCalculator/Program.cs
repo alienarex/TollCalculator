@@ -1,26 +1,29 @@
 ﻿using System;
-using TollFeeCalculator.Models;
-using TollFeeCalculator.Models.VehicleModels;
-using TollFeeCalculator.TollFeeCalculatorNET;
+using TollCalculator.Models;
+using TollCalculator.Models.VehicleModels;
+using static TollCalculator.TollFeeCalculatorNET.TollFeeCalculator;
 
-namespace TollFeeCalculator
+namespace TollCalculator
 {
     public class Program
     {
+        static readonly TollDay tollDay = new(new DateTime(2021, 12, 01));
+
         static void Main(string[] args)
         {
-            IVehicle vehicle = new Car();
+            Vehicle vehicle = new(Enums.VehicleType.Car) { CurrentTollDay = tollDay };
             DateTime date = DateTime.Now; // this should come from other system
             GetCalculation(vehicle, date);
             Console.ReadLine();
         }
 
-        public static void GetCalculation(IVehicle vehicle, DateTime date)
+        public static void GetCalculation(Vehicle vehicle, DateTime date)
         {
-            vehicle.GetCurrentTollDay().Passages.Add(new Passage(date));
-            if (!vehicle.IsVehicleTollFree() && !vehicle.GetCurrentTollDay().TollFreeDay)
+            vehicle.CurrentTollDay.Passages.Add(new Passage(date));
+            if (!vehicle.IsTollFreeVehicle && !vehicle.CurrentTollDay.TollFreeDay)
             {
-                TollCalculator.SetFee(vehicle.GetCurrentTollDay());
+                SetFee(vehicle.CurrentTollDay);
+                Console.WriteLine($"The vehicle is a {vehicle.VehicleType} and the fee is {vehicle.CurrentTollDay.TotalFee}");
             }
         }
     }

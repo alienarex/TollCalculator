@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TollFeeCalculator.Models
+namespace TollCalculator.Models
 {
     public class Passage
     {
@@ -12,21 +8,10 @@ namespace TollFeeCalculator.Models
         {
             TimeOfPassage = newPassageTime;
         }
-        private DateTime timeOfPassage;
 
-        public DateTime TimeOfPassage
-        {
-            get { return timeOfPassage; }
-            private set { timeOfPassage = value; }
-        }
+        public DateTime TimeOfPassage { get; private set; }
 
-        private int fee;
-
-        public int Fee
-        {
-            get { return fee; }
-            set { fee = value; }
-        }
+        public int Fee { get; set; }
 
     }
 }

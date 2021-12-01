@@ -6,7 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IVehicle.cs" />
+    <Compile Remove="Models\VehicleModels\Car.cs" />
+    <Compile Remove="Models\VehicleModels\Diplomat.cs" />
+    <Compile Remove="Models\VehicleModels\Emergency.cs" />
+    <Compile Remove="Models\VehicleModels\HeavyBus.cs" />
+    <Compile Remove="Models\VehicleModels\Military.cs" />
+    <Compile Remove="Models\VehicleModels\Motorbike.cs" />
+    <Compile Remove="Models\VehicleModels\Tractor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Nager.Date" Version="1.30.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

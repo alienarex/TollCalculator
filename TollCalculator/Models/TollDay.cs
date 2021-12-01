@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using static TollFeeCalculator.Models.Calander;
-namespace TollFeeCalculator.Models
+using static TollCalculator.Models.Calander;
+
+namespace TollCalculator.Models
 {
     public class TollDay
     {
-        // TODO Implement INotifyPropertyChanged?
         public TollDay(DateTime date)
         {
             Passages = new List<Passage>();
@@ -25,7 +24,7 @@ namespace TollFeeCalculator.Models
 
         private DateTime todayDate;
 
-        #region properties
+        #region Start properties
 
         public bool TollFreeDay { get; private set; }
 
@@ -45,13 +44,10 @@ namespace TollFeeCalculator.Models
             set { todayDate = value; }
         }
 
-        #endregion properties
-
-
-
+        #endregion End properties
 
         /// <summary>
-        /// Checks if TodayDate is a weekend, holiday or day before a valid hpliday
+        /// Checks if TodayDate is a weekend, holiday or day before a valid holiday
         /// </summary>
         /// <returns>true if today is a tollfree day</returns>
         bool IsTodayATollFreeDay()
