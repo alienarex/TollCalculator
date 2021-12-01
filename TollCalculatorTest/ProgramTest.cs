@@ -1,27 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TollFeeCalculator;
-using TollFeeCalculator.Models;
-using TollFeeCalculator.Models.VehicleModels;
+using TollCalculator;
+using TollCalculator.Models;
+using TollCalculator.Models.VehicleModels;
 using Xunit;
 
 namespace TollFeeCalculatorTest
 {
     public class ProgramTest
     {
-        readonly List<Vehicle> vehicles = new()
-        {
-            new Car() { RegistrationNumber = "1" },
-            new Motorbike() { RegistrationNumber = "2" },
-            new HeavyBus() { RegistrationNumber = "3" },
-            new Military() { RegistrationNumber = "4" },
-            new Tractor() { RegistrationNumber = "5" },
-            new Emergency() { RegistrationNumber = "6" },
-            new Car() { RegistrationNumber = "7" },
-            new Diplomat() { RegistrationNumber = "8" },
-            new Car() { RegistrationNumber = "9" }
-        };
+
         readonly List<DateTime> listOfDates = new()
         {
             new DateTime(2021, 11, 29, 07, 00, 00), // 22
@@ -30,11 +19,20 @@ namespace TollFeeCalculatorTest
             new DateTime(2021, 11, 29, 15, 03, 11), // 16
             new DateTime(2021, 11, 29, 17, 03, 11) // 16
         };
+        readonly IEnumerable<IVehicle> tollFreeVehicles = new List<Vehicle>
+            {
+                new Vehicle(TollCalculator.Enums.VehicleType.Military),
+                new Vehicle(TollCalculator.Enums.VehicleType.Motorbike),
+                new Vehicle(TollCalculator.Enums.VehicleType.Emergency),
+                new Vehicle(TollCalculator.Enums.VehicleType.Diplomat),
+                new Vehicle(TollCalculator.Enums.VehicleType.HeavyBus),
+                new Vehicle(TollCalculator.Enums.VehicleType.Tractor)
+            };
 
         [Fact]
         public void GetFeeFromFirstPassageTollDayMotorbike_ShouldReturn0()
         {
-            IVehicle vehicle = new Motorbike();
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Motorbike);
             int expectedFee = 0;
             DateTime date = new DateTime(2021, 11, 26, 06, 15, 00);
             Program.GetCalculation(vehicle, date);
@@ -45,7 +43,7 @@ namespace TollFeeCalculatorTest
         [Fact]
         public void GetFeeFromFirstPassageTollDayCar_ShouldReturn9()
         {
-            IVehicle vehicle = new Car();
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Car);
             int expectedFee = 9;
             DateTime date = new DateTime(2021, 11, 26, 06, 15, 00);
             Program.GetCalculation(vehicle, date);
@@ -54,60 +52,87 @@ namespace TollFeeCalculatorTest
         }
 
         [Fact]
-        public void GetTotalFeeFromFirstCarInList_ShouldReturn60()
+        public void GetTotalFeeFromCar_ShouldReturn60()
         {
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Car);
             int expectedFee = 60;
+
             for (int i = 0; i < listOfDates.Count; i++)
             {
-                foreach (var veh in vehicles)
-                {
-                    Program.GetCalculation(veh, listOfDates[i]);
-                }
+                Program.GetCalculation(vehicle, listOfDates[i]);
             }
-            var vehic = vehicles.Select(x => x).Where(veh => veh.GetVehicleType() == "Car").First();
-            Assert.Equal(expectedFee, vehic.GetCurrentTollDay().TotalFee);
+            Assert.Equal(expectedFee, vehicle.GetCurrentTollDay().TotalFee);
         }
 
         [Fact]
-        public void GetTotalFeeFromFirstMotorbikeInList_ShouldReturn0()
+        public void GetTotalFeeFromMotorbike_ShouldReturn0()
         {
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Motorbike);
             int expectedFee = 0;
+
             for (int i = 0; i < listOfDates.Count; i++)
             {
-                foreach (var veh in vehicles)
-                {
-                    Program.GetCalculation(veh, listOfDates[i]);
-                }
+                Program.GetCalculation(vehicle, listOfDates[i]);
             }
-            var vehic = vehicles.Select(x => x).Where(veh => veh.GetVehicleType() == "Motorbike").First();
-            Assert.Equal(expectedFee, vehic.GetCurrentTollDay().TotalFee);
+            Assert.Equal(expectedFee, vehicle.GetCurrentTollDay().TotalFee);
         }
 
         [Fact]
         public void GetTotalFeeFromCar_ShouldReturn22()
         {
-            int expectedFee = 22;
-            var vehic = vehicles.Select(x => x).Where(veh => veh.GetVehicleType() == "Car").First();
-            Program.GetCalculation(vehic, listOfDates[0]);
-            Program.GetCalculation(vehic, listOfDates[1]);
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Car);
 
-            Assert.Equal(expectedFee, vehic.GetCurrentTollDay().TotalFee);
+            int expectedFee = 22;
+            Program.GetCalculation(vehicle, listOfDates[0]);
+            Program.GetCalculation(vehicle, listOfDates[1]);
+
+            Assert.Equal(expectedFee, vehicle.GetCurrentTollDay().TotalFee);
         }
 
         [Fact]
         public void GetTotalFeeFromCarOnSaturday_ShouldReturn0()
         {
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Car) { CurrentTollDay = new TollDay(new DateTime(2021, 11, 20)) };
             int expectedFee = 0;
-            var vehic = vehicles.Select(x => x).Where(veh => veh.GetVehicleType() == "Car").First();
-            vehic.CurrentTollDay = new TollDay(new DateTime(2021, 11, 20));
 
-            Program.GetCalculation(vehic, new DateTime(2021, 11, 20, 07, 00, 00));
-            Program.GetCalculation(vehic, new DateTime(2021, 11, 20, 07, 15, 00));
-            Program.GetCalculation(vehic, new DateTime(2021, 11, 20, 11, 15, 00));
-            Program.GetCalculation(vehic, new DateTime(2021, 11, 20, 15, 03, 11));
-            Program.GetCalculation(vehic, new DateTime(2021, 11, 20, 17, 03, 05));
+            Program.GetCalculation(vehicle, new DateTime(2021, 11, 20, 07, 00, 00));
+            Program.GetCalculation(vehicle, new DateTime(2021, 11, 20, 07, 15, 00));
+            Program.GetCalculation(vehicle, new DateTime(2021, 11, 20, 11, 15, 00));
+            Program.GetCalculation(vehicle, new DateTime(2021, 11, 20, 15, 03, 11));
+            Program.GetCalculation(vehicle, new DateTime(2021, 11, 20, 17, 03, 05));
 
-            Assert.Equal(expectedFee, vehic.GetCurrentTollDay().TotalFee);
+            Assert.Equal(expectedFee, vehicle.GetCurrentTollDay().TotalFee);
+        }
+
+        [Fact]
+        public void GetTotalFeeFromMilitaryOnSaturday_ShouldReturn0()
+        {
+            IVehicle vehicle = new Vehicle(TollCalculator.Enums.VehicleType.Military);
+            int expectedFee = 0;
+
+            Program.GetCalculation(vehicle, listOfDates[0]);
+            Program.GetCalculation(vehicle, listOfDates[1]);
+
+            Assert.Equal(expectedFee, vehicle.GetCurrentTollDay().TotalFee);
+        }
+
+        [Fact]
+        public void GetTotalFeeFromAllTollFreeVehicles_ShouldReturn0()
+        {
+
+            int expectedFee = 0;
+            int actualFee = 0;
+
+            foreach (var veh in tollFreeVehicles)
+            {
+                for (int i = 0; i < listOfDates.Count; i++)
+                {
+                    Program.GetCalculation(veh, listOfDates[i]);
+                }
+                actualFee += veh.GetCurrentTollDay().TotalFee;
+            }
+
+            Assert.Equal(expectedFee, actualFee);
         }
     }
 }
