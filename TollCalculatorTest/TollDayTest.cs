@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using TollCalculator.Models;
-using Xunit;
 using TollCalculator.TollFeeCalculatorNET;
+using Xunit;
 
 namespace TollFeeCalculatorTest
 {

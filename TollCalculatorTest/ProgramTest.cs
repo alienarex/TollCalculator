@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using TollCalculator;
 using TollCalculator.Models;
-using TollCalculator.Models.VehicleModels;
 using Xunit;
 
 namespace TollFeeCalculatorTest
