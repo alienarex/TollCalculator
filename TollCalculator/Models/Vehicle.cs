@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TollCalculator.Enums;
 
-namespace TollCalculator.Models.VehicleModels
+namespace TollCalculator.Models
 {
     public class Vehicle
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using TollCalculator.Models;
-using TollCalculator.Models.VehicleModels;
 using static TollCalculator.TollFeeCalculatorNET.TollFeeCalculator;
 
 namespace TollCalculator
