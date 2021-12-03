@@ -1,6 +1,6 @@
 .vs
 TollCalculator/ClassDiagram.cd
-TollCalculator/obj
-TollCalculator/bin
-TollCalculatorTest/obj
-TollCalculatorTest/bin
+TollCalculator/obj/*
+TollCalculator/bin/*
+TollCalculatorTest/obj/*
+TollCalculatorTest/bin/*
