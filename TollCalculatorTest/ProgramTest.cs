@@ -162,5 +162,24 @@ namespace TollFeeCalculatorTest
 
             Assert.Equal(expectedFee, actualFee);
         }
+
+        [Fact]
+        public void GetTotalFeeForCarInJuly_ShouldReturn0()
+        {
+            int expectedFee = 0;
+            DateTime testDate = new DateTime(2021, 07, 11);
+            Vehicle vehicle =
+                  new(TollCalculator.Enums.VehicleType.Car)
+                  {
+                      CurrentTollDay = new TollDay(testDate)
+                  };
+            foreach (var date in listOfDates)
+            {
+                Program.GetCalculation(vehicle, date);
+            }
+
+            Assert.Equal(expectedFee, vehicle.CurrentTollDay.TotalFee);
+        }
+
     }
 }

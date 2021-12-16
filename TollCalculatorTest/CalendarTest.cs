@@ -59,5 +59,14 @@ namespace TollFeeCalculatorTest
 
             Assert.False(isDayBefforeValidDay);
         }
+
+        [Fact]
+        public void IsDateATollFreeMonth_ShouldReturnTrue()
+        {
+            DateTime testDate = new DateTime(2021, 07, 23, 08, 11, 00);
+            bool isDayATollFreeMonth = TollCalculator.Models.Calander.IsDateATollFreeMonth(testDate);
+
+            Assert.True(isDayATollFreeMonth);
+        }
     }
 }

@@ -54,5 +54,13 @@ namespace TollFeeCalculatorTest
             }
             Assert.Equal(expectedReturnValue, tollDayTest.TotalFee);
         }
+
+        [Fact]
+        public void IsJulyATollFreeMonth_ShouldReturnTrue()
+        {
+            DateTime today = new(2021, 07, 29);
+            TollDay tollDayTest = new(today);
+            Assert.True(tollDayTest.TollFreeDay);
+        }
     }
 }
