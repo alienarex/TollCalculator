@@ -9,7 +9,7 @@ namespace TollCalculator.Models
     {
         public static bool IsDateATollFreeMonth(DateTime date)
         {
-            return date.Month == 07;
+            return date.Month == 07; // july month
         }
 
         /// <summary>

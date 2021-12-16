@@ -56,7 +56,7 @@ namespace TollCalculator.Models
 
             if (IsDateADayBeforeAValidHoliday(TodayDate)) return true; // Checks if today is a day before a valid holiday
             if (IsDateAHoliday(TodayDate)) return true;
-            if (IsDateATollFreeMonth(TodayDate)) return true;
+            if (IsDateATollFreeMonth(TodayDate)) return true; 
 
             else
                 return false;
