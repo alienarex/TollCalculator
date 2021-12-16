@@ -7,6 +7,10 @@ namespace TollCalculator.Models
 {
     public static class Calander
     {
+        public static bool IsDateATollFreeMonth(DateTime date)
+        {
+            return date.Month == 07;
+        }
 
         /// <summary>
         /// Check if today date is a weekend in Sweden.
